@@ -28,6 +28,16 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          curl -sS -o /tmp/target_repo_check.json -w "%{http_code}" \
+            -H "Authorization: token ${TARGET_REPO_TOKEN}" \
+            https://api.github.com/repos/DentaFlow-Groupes/dentalFlow-DevSecOps \
+            | tee /tmp/target_repo_status.txt
+          STATUS_CODE="$(cat /tmp/target_repo_status.txt)"
+          if [ "$STATUS_CODE" != "200" ]; then
+            echo "Repo access check failed (HTTP $STATUS_CODE)."
+            cat /tmp/target_repo_check.json || true
+            exit 1
+          fi
           git remote add mirror "https://x-access-token:${TARGET_REPO_TOKEN}@github.com/DentaFlow-Groupes/dentalFlow-DevSecOps.git"
           git push --force mirror HEAD:main
 
