@@ -45,6 +45,28 @@ jobs:
             --exclude .DS_Store \
             ./ "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}/dentaflow/"
 
+      - name: Write .env on VPS
+        env:
+          SPRING_PROFILE: ${{ secrets.SPRING_PROFILE }}
+          CORE_DB_NAME: ${{ secrets.CORE_DB_NAME }}
+          CORE_DB_USER: ${{ secrets.CORE_DB_USER }}
+          CORE_DB_PASSWORD: ${{ secrets.CORE_DB_PASSWORD }}
+          CUSTOMER_DB_NAME: ${{ secrets.CUSTOMER_DB_NAME }}
+          CUSTOMER_DB_USER: ${{ secrets.CUSTOMER_DB_USER }}
+          CUSTOMER_DB_PASSWORD: ${{ secrets.CUSTOMER_DB_PASSWORD }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        run: |
+          printf '%s\n' \
+            "SPRING_PROFILE=$SPRING_PROFILE" \
+            "CORE_DB_NAME=$CORE_DB_NAME" \
+            "CORE_DB_USER=$CORE_DB_USER" \
+            "CORE_DB_PASSWORD=$CORE_DB_PASSWORD" \
+            "CUSTOMER_DB_NAME=$CUSTOMER_DB_NAME" \
+            "CUSTOMER_DB_USER=$CUSTOMER_DB_USER" \
+            "CUSTOMER_DB_PASSWORD=$CUSTOMER_DB_PASSWORD" \
+            "JWT_SECRET=$JWT_SECRET" \
+          | ssh "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" "cat > /home/${{ secrets.VPS_USER }}/dentaflow/.env && chmod 600 /home/${{ secrets.VPS_USER }}/dentaflow/.env"
+
       - name: Deploy
         run: |
           ssh "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" "cd /home/${{ secrets.VPS_USER }}/dentaflow && docker compose up -d --build"
