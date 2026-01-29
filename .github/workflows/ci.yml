@@ -83,3 +83,28 @@ jobs:
           cache: maven
       - name: Run tests
         run: mvn -B test
+
+  sonarqube:
+    needs:
+      - test-backend
+    if: ${{ secrets.SONAR_TOKEN != '' }}
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: maven
+      - name: SonarQube scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: >
+          mvn -B -DskipTests verify
+          org.sonarsource.scanner.maven:sonar-maven-plugin:3.10.0.2594:sonar
+          -Dsonar.token="$SONAR_TOKEN"
