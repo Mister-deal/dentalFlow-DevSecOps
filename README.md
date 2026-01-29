@@ -18,7 +18,7 @@ L’application repose sur une architecture **frontend / backend conteneurisée*
 - 📊 Qualité du code & DevSecOps
 - 📘 Documentation technique
 - 🐳 Docker & conteneurisation
-- 🔁 CI/CD (prévu)
+- 🔁 CI/CD
 - 🛣️ Évolutions prévues
 - 👤 Auteur
 
