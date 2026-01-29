@@ -1,34 +1,51 @@
-# dentalFlow-DevSecOps
+# 🦷 DentalFlow
+## Plateforme DevSecOps pour la gestion de prothèses dentaires
 
-Présentation du projet
+DentalFlow est une application web orientée **DevSecOps** dédiée à la gestion des commandes de prothèses dentaires.  
+Le projet intègre des exigences fortes de **traçabilité réglementaire**, de **sécurité** et de **qualité logicielle**, conformément aux contraintes du domaine médical.
 
-DentalFlow est une application web orientée DevSecOps destinée à la gestion des commandes de prothèses dentaires, intégrant des exigences fortes de traçabilité réglementaire, de sécurité et de qualité logicielle.
+L’application repose sur une architecture **frontend / backend conteneurisée**, avec l’intégration d’outils de **qualité**, de **sécurité** et d’**observabilité** tels que **SonarQube**, **Swagger (OpenAPI)** et **Spring Boot Actuator**.
 
-Le projet est conçu selon une architecture frontend / backend conteneurisée, avec une intégration d’outils de qualité et de sécurité comme SonarQube, Swagger et Spring Boot Actuator.
+---
 
-🎯 Objectifs
+## 📑 Sommaire
 
-Gérer les commandes de prothèses dentaires
+- 🎯 Objectifs
+- 🧱 Architecture globale
+- 🚀 Stack technique
+- 🔐 Sécurité & conformité (RGPD / Security by Design)
+- 📦 Lancement du projet
+- 📊 Qualité du code & DevSecOps
+- 📘 Documentation technique
+- 🐳 Docker & conteneurisation
+- 🔁 CI/CD (prévu)
+- 🛣️ Évolutions prévues
+- 👤 Auteur
 
-Assurer la traçabilité réglementaire (RDM)
+---
 
-Minimiser et sécuriser les données patients
+## 🎯 Objectifs
 
-Mettre en place une chaîne DevSecOps complète
+- Gérer les commandes de prothèses dentaires
+- Assurer la **traçabilité réglementaire** (RDM)
+- Minimiser et sécuriser les **données patients**
+- Mettre en place une **chaîne DevSecOps complète**
+- Fournir une base technique **propre, maintenable et auditable**
 
-Fournir une base technique propre, maintenable et auditable
+---
 
-🧱 Architecture globale
+## 🧱 Architecture globale
 
+```text
 DentalFlow
 ├── frontend/            # Application frontend
 ├── backend/
-│   └── dentaflow-app/   # Application Spring Boot
+│   └── dentalflow-app/  # Application Spring Boot
 ├── docker-compose.yml
 ├── nginx.conf
 └── README.md
-
-Vue d’ensemble
+```
+## Vue d’ensemble:
 
 Frontend : application web servie via Nginx
 
@@ -38,79 +55,85 @@ Reverse proxy : Nginx
 
 Qualité & sécurité : SonarQube
 
-Observabilité : Actuator
+Observabilité : Spring Boot Actuator
 
-API DOC: Swagger
+Documentation API : Swagger / OpenAPI
 
-🚀 Stack technique
+## 🚀 Stack technique Backend
 
-Backend
+- Java 21
 
-Java 21
+- Spring Boot 4.x
 
-Spring Boot 4.x
+- Spring Web
 
-Spring Web
+- Spring Data JPA
 
-Spring Data JPA
+- Spring Security
 
-Spring Security (prévu)
+- Spring Boot Actuator
 
-Spring Boot Actuator
+- Swagger / OpenAPI
 
-Swagger / OpenAPI
+- Maven (wrapper mvnw)
 
-Maven (wrapper mvnw)
+## Frontend
 
-Frontend
+- Node.js
 
-Node.js
+- Framework frontend : React / Next.js (selon implémentation)
 
-Framework frontend (React / Next.js selon implémentation)
+- Nginx (serving + reverse proxy)
 
-Nginx (serving + reverse proxy)
+## DevSecOps
 
-DevSecOps
+- Docker / Docker Compose
 
-Docker / Docker Compose
+- SonarQube
 
-SonarQube
+- Git
 
-Git
+## 🔐 Sécurité & conformité (RGPD / Security by Design)
+- Données traitées
 
-🔐 Sécurité & conformité
+- Données patients minimisées
 
-Données traitées
+- Fichiers STL (modèles de prothèses)
 
-Données patients minimisées
+- Base légale
 
-Fichiers STL (prothèses)
+- Obligation légale (RDM)
 
-Base légale
+- Consentement du patient
 
-Obligation légale (RDM)
+- Conservation des données
 
-Consentement
+- Archivage : 10 ans (exigences RDM)
 
-Conservation
+- Principes de sécurité
 
-Archivage : 10 ans (RDM)
+- Security by Design
 
-📦 Lancement du projet
+- Séparation claire des responsabilités
 
-Prérequis
+- Configuration externalisée
 
-Docker & Docker Compose
+- Secrets non versionnés
 
-Node.js
+- Images Docker minimales
 
-Java 21
+## 📦 Lancement du projet Prérequis
 
-Lancement global
+- Docker & Docker Compose
 
-docker-compose up --build
+- Node.js
 
-Accès aux services
+- Java 21
+
+- Lancement global
+- docker-compose up --build
+
+## Accès aux services
 
 Frontend : http://localhost
 
@@ -122,125 +145,120 @@ Actuator : http://localhost:8080/actuator
 
 SonarQube : http://localhost:9000
 
-📊 Qualité du code (SonarQube)
+## 📊 Qualité du code & DevSecOps
 
-Le projet est analysé via SonarQube pour :
+Le projet est analysé via SonarQube afin d’identifier :
 
-Bugs
+- Bugs
 
-Code smells
+- Code smells
 
-Vulnérabilités
+- Vulnérabilités
 
-Dette technique
+- Dette technique
 
-Analyse frontend :
-
+### Analyse frontend
 npx sonar-scanner
 
-Analyse backend :
-
+### Analyse backend
 ./mvnw clean verify sonar:sonar
 
-📘 Documentation technique
+## 📘 Documentation technique
+### 🧩 Backend – Architecture
 
-🧩 Backend – Architecture
+- Architecture en couches
 
-Pattern
+- Controller : exposition REST
 
-Architecture en couches
+- Service : logique métier
 
-Controller
+- Repository : accès aux données
 
-Service
-
-Repository
-
-Responsabilités
-
-Controller : exposition REST
-
-Service : logique métier
-
-Repository : accès aux données
-
-📑 Swagger / OpenAPI
+## 📑 Swagger / OpenAPI
 
 Swagger est utilisé pour :
 
-Documenter l’API
+- Documenter l’API
 
-Tester les endpoints
+- Tester les endpoints
 
-Faciliter l’intégration frontend
+- Faciliter l’intégration frontend
 
-Accès :
+### Accès :
 
 /swagger-ui.html
 
-📈 Actuator
+### 📈 Spring Boot Actuator
 
 Spring Boot Actuator permet :
 
-Monitoring applicatif
+- Monitoring applicatif
 
-Health checks
+- Health checks
 
-Metrics techniques
+- Exposition de métriques techniques
 
 Endpoints clés :
 
 /actuator/health
+
 /actuator/info
 
-🐳 Docker
+## 🐳 Docker & conteneurisation Backend
 
-Backend
+- Image Java slim
 
-Image Java slim
+- Build multi-stage
 
-Build multi-stage
+- JAR Spring Boot
 
-Jar Spring Boot
+### Frontend:
 
-Frontend
+- Build Node.js
 
-Build Node
+- Image Nginx alpine
 
-Image Nginx alpine
+### Avantages:
 
-Avantages
+- Images légères
 
-Images légères
+- Déploiement reproductible
 
-Déploiement reproductible
+- Isolation des services
 
-Isolation des services
+## 🔁 CI/CD
 
-🔄 Bonnes pratiques DevSecOps
+Le projet a intégré une chaîne CI/CD DevSecOps complète :
 
-Analyse SonarQube systématique
+- Lint & tests automatiques
 
-Séparation front / back
+- Analyse SonarQube bloquante (Quality Gate)
 
-Configuration externalisée
+- Build Docker automatisé
 
-Tokens et secrets non versionnés
+- Dependabot
 
-Images Docker minimales
+- Déploiement contrôlé
 
-🛣️ Évolutions prévues
+### Outils envisagés:
 
-Authentification (JWT / OAuth2)
+- GitHub Actions / GitLab CI
 
-Gestion fine des rôles
+- Docker
 
-Sécurisation HDS
+- SonarQube
 
-CI/CD (GitHub Actions / GitLab CI)
+## 🛣️ Évolutions prévues
 
-Tests de sécurité automatisés
+- Authentification (JWT / OAuth2)
 
-👤 Auteur
+- Gestion fine des rôles
 
-Projet réalisé dans une démarche DevSecOps, orientée qualité, sécurité et conformité réglementaire.
+- Sécurisation HDS
+
+- Tests de sécurité automatisés
+
+## 👤 Auteur
+
+Projet réalisé dans une démarche DevSecOps, orientée qualité, sécurité et maintenabilité, grâce à @Mister-deal, @Julien2195 et @leobelg.
+Supervisé par 2I_ACADEMY
