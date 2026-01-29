@@ -83,3 +83,35 @@ jobs:
           cache: maven
       - name: Run tests
         run: mvn -B test
+
+  sonarqube:
+    needs:
+      - test-backend
+    runs-on: ubuntu-latest
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: maven
+      - name: SonarQube scan
+        if: >
+          ${{
+            env.SONAR_TOKEN != '' &&
+            (
+              (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+              (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
+            )
+          }}
+        run: >
+          mvn -B -DskipTests verify
+          org.sonarsource.scanner.maven:sonar-maven-plugin:3.10.0.2594:sonar
+          -Dsonar.token="$SONAR_TOKEN"
